@@ -4,7 +4,9 @@
     @sendValue="getData" 
     />
     <main>
-      <Main />
+      <Main
+      :dataArr="searchData" 
+      />
     </main>
   </div>
 </template>
@@ -24,7 +26,8 @@ export default {
     return {
       myApi: 'https://api.themoviedb.org/3/search/movie?',
       myApiKey: 'api_key=41f34acca19f8f449102a7fd33b9d325',
-      inputSearch: ''
+      inputSearch: '',
+      searchData: ''
     }
   },
   methods: {
@@ -33,6 +36,7 @@ export default {
       axios
         .get(this.myApi + this.myApiKey + '&query=' + this.inputSearch)
         .then(res => {
+          this.searchData = res.data.results;
           console.log(res.data.results);
         })
     },

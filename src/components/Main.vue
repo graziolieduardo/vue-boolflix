@@ -1,7 +1,11 @@
 <template>
-    <div>
-        <AlbumTemplate />
-    </div>
+    <ul>
+        <AlbumTemplate 
+        v-for="(item, index) in dataArr"
+        :key="index"
+        :item="item" 
+        />
+    </ul>
 </template>
 
 <script>
@@ -9,6 +13,7 @@ import AlbumTemplate from './AlbumTemplate.vue'
 
 export default {
     name: 'Main',
+    props: ['dataArr'],
     components: {
         AlbumTemplate
     }
