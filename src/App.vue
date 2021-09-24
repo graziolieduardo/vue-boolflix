@@ -1,28 +1,49 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Header
+    @sendValue="getData" 
+    />
+    <main>
+      <Main />
+    </main>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header.vue'
+import Main from './components/Main.vue'
+import axios from 'axios'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    Header,
+    Main
+  },
+  data() {
+    return {
+      myApi: 'https://api.themoviedb.org/3/search/movie?',
+      myApiKey: 'api_key=41f34acca19f8f449102a7fd33b9d325',
+      inputSearch: ''
+    }
+  },
+  methods: {
+    getData(value) {
+      this.inputSearch = value;
+      axios
+        .get(this.myApi + this.myApiKey + '&query=' + this.inputSearch)
+        .then(res => {
+          console.log(res.data.results);
+        })
+    },
+    // getValue(value) {
+    //   this.inputSearch = value;
+    // }
+  },
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  @import './assets/style/general.scss';
+
 </style>
