@@ -1,11 +1,12 @@
 <template>
   <div id="app">
     <Header
-    @sendValue="getData" 
+    @sendValue="search" 
     />
     <main>
       <Main
-      :dataArr="searchData" 
+      :moviesArr="moviesData"
+      :tvArr="seriesData" 
       />
     </main>
   </div>
@@ -24,25 +25,41 @@ export default {
   },
   data() {
     return {
-      myApi: 'https://api.themoviedb.org/3/search/movie?',
-      myApiKey: 'api_key=41f34acca19f8f449102a7fd33b9d325',
-      inputSearch: '',
-      searchData: ''
+      myApi: 'https://api.themoviedb.org/3/search/',
+      myApiKey: '41f34acca19f8f449102a7fd33b9d325',
+      moviesData: [],
+      seriesData: [],
     }
   },
   methods: {
-    getData(value) {
-      this.inputSearch = value;
+    getMoviesData(apiParams) {
       axios
-        .get(this.myApi + this.myApiKey + '&query=' + this.inputSearch)
+        .get(this.myApi + 'movie', apiParams)
         .then(res => {
-          this.searchData = res.data.results;
+          this.moviesData = res.data.results;
           console.log(res.data.results);
         })
     },
-    // getValue(value) {
-    //   this.inputSearch = value;
-    // }
+    getSeriesData(apiParams) {
+      axios
+        .get(this.myApi + 'tv', apiParams)
+        .then(res => {
+          this.seriesData = res.data.results;
+          console.log(res.data.results);
+        })
+    },
+    search(inputValue) {
+      const paramsObj = {
+        params: {
+          api_key: this.myApiKey,
+          query: inputValue
+        }
+      }
+
+      this.getMoviesData(paramsObj);
+      this.getSeriesData(paramsObj);
+    }
+    
   },
 }
 </script>

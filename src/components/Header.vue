@@ -1,20 +1,16 @@
 <template>
-    <div class="container-fluid">
-        <div class="row h-100">
-            <div class="col h-100 d-flex align-items-center justify-content-between">
-                <div id="logo">
+    <div class="header-container">
+        <div id="logo">
+            <h1>BOOLFLIX</h1>
+        </div>
+        <div class="input-box">
+            <form action="">
+                <input v-model="inputText" 
+                type="text" 
+                placeholder="search...">
 
-                </div>
-                <div class="input-box">
-                    <form action="">
-                        <input v-model="inputText" 
-                        type="text" 
-                        placeholder="search...">
-
-                        <button @click.prevent="$emit('sendValue', inputText)">Search</button>
-                    </form>
-                </div>
-            </div>
+                <button @click.prevent="$emit('sendValue', inputText)">Search</button>
+            </form>
         </div>
     </div>
 </template>
@@ -33,9 +29,22 @@ export default {
 <style scoped lang="scss">
   @import '../assets/style/general.scss';
 
-    .container-fluid {
-        background-color: darkgray;
+    .header-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
         height: 70px;
+        z-index: 5;
+        background-color: black;
+
+        h1 {
+            color: red;
+            padding: 20px;
+        }
     }
 </style>
 
