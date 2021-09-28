@@ -2,16 +2,16 @@
     <div class="container">
         <h1>Movies</h1>
         <ul>
-            <MovieTemplate 
+            <CardTemplate 
             v-for="(item, index) in moviesArr"
             :key="index"
             :item="item" 
             />
         </ul>
-
+           
         <h1>Series</h1>
         <ul>
-            <TvTemplate 
+            <CardTemplate
             v-for="(item, index) in tvArr"
             :key="index"
             :item="item" 
@@ -21,15 +21,14 @@
 </template>
 
 <script>
-import MovieTemplate from './MovieTemplate.vue'
-import TvTemplate from './TvTemplate.vue'
+import CardTemplate from './CardTemplate.vue'
+
 
 export default {
     name: 'Main',
     props: ['moviesArr', 'tvArr'],
     components: {
-        MovieTemplate,
-        TvTemplate
+        CardTemplate,
     },
 }
 </script>
@@ -48,7 +47,6 @@ export default {
             display: flex;
             overflow-x: auto;
             overflow-y: hidden;
-
 
             &::After {
                 content: '';

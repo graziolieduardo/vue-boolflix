@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import CountryFlag from 'vue-country-flag'
+import "@fontsource/montserrat";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
